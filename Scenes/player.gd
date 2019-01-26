@@ -1,5 +1,6 @@
 extends KinematicBody
 
+const gravity = 5;
 var walk_speed = 10
 var magazine_size = 5
 var magazine = magazine_size
@@ -43,7 +44,7 @@ func _physics_process(delta):
 	# movement
 	
 	var dir = Vector3()
-	
+
 	if (!in_home):
 		if (Input.is_action_pressed("ui_up")):
 			dir -= Vector3(0, 0, 1)
@@ -53,11 +54,14 @@ func _physics_process(delta):
 			dir -= Vector3(1, 0, 0)
 		if (Input.is_action_pressed("ui_right")):
 			dir += Vector3(1, 0, 0)
+		
 	
 	dir = dir.normalized() * delta * walk_speed
 	
 	move_and_collide(dir)
 	
+	dir -= Vector3(0, gravity, 0)
+	move_and_slide(dir)
 	
 	# looking
 	
