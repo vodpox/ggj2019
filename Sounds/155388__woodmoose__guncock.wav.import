@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/155388__woodmoose__guncock.wav-c65ac3f20a91a7616394e388cbf403a1.sample"
+
+[deps]
+
+source_file="res://Sounds/155388__woodmoose__guncock.wav"
+dest_files=[ "res://.import/155388__woodmoose__guncock.wav-c65ac3f20a91a7616394e388cbf403a1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

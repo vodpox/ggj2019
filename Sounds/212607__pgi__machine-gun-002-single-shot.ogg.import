@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/212607__pgi__machine-gun-002-single-shot.ogg-9c8da21d9b1c4ee1ce63a397cd7f7c7c.oggstr"
+
+[deps]
+
+source_file="res://Sounds/212607__pgi__machine-gun-002-single-shot.ogg"
+dest_files=[ "res://.import/212607__pgi__machine-gun-002-single-shot.ogg-9c8da21d9b1c4ee1ce63a397cd7f7c7c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
