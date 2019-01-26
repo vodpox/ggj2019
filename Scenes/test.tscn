@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/bullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/home.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/GUI.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -83,6 +84,7 @@ disabled = false
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody" index="1"]
 
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0332228, -1.90735e-006, 0.0181496 )
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -104,5 +106,7 @@ transform = Transform( 0.918206, 0, 0.396103, 0, 1, 0, -0.396103, 0, 0.918206, -
 [node name="Home" parent="." index="5" instance=ExtResource( 4 )]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.73528, 1.63694, -12.5696 )
+
+[node name="gui" parent="." index="6" instance=ExtResource( 5 )]
 
 
