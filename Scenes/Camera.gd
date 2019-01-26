@@ -7,5 +7,5 @@ func _ready():
 	pass
 
 func _process(delta):
-	translation = player.translation + Vector3(0, 10, 10)
+	translation = player.translation + Vector3(0, 30, 30)
 	pass

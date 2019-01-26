@@ -18,6 +18,7 @@ func get_damage(var amount):
 		get_parent().remove_child(self)
 
 func _ready():
+	move_and_collide(Vector3(0, -100, 0)) # to ground
 	camera = get_node("../Camera")
 	#camera = $Camera
 	bullet_scene = load("res://Scenes/bullet.tscn")

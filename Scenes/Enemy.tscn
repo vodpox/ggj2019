@@ -11,15 +11,15 @@ radial_segments = 64
 rings = 32
 is_hemisphere = false
 
-[sub_resource type="BoxShape" id=7]
-
-extents = Vector3( 1, 1, 1 )
-
 [sub_resource type="BoxShape" id=5]
 
 extents = Vector3( 1, 1, 1 )
 
-[sub_resource type="CubeMesh" id=6]
+[sub_resource type="BoxShape" id=6]
+
+extents = Vector3( 1, 1, 1 )
+
+[sub_resource type="CubeMesh" id=7]
 
 custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 size = Vector3( 2, 2, 2 )
@@ -62,8 +62,7 @@ _sections_unfolded = [ "Geometry", "Transform", "material" ]
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="1"]
 
-visible = false
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
 
@@ -82,20 +81,20 @@ angular_damp = 1.0
 priority = 0.0
 monitoring = true
 monitorable = true
-collision_layer = 1
-collision_mask = 1
+collision_layer = 0
+collision_mask = 3
 audio_bus_override = false
 audio_bus_name = "Master"
 reverb_bus_enable = false
 reverb_bus_name = "Master"
 reverb_bus_amount = 0.0
 reverb_bus_uniformity = 0.0
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape" type="CollisionShape" parent="AttackArea" index="0"]
 
 transform = Transform( 0.999995, 0.00146619, 0.00594664, -0.000369281, 0.999998, 0.00183877, -0.00148598, -0.00184096, 0.999994, 0, 0, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
 
@@ -110,11 +109,20 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 6 )
+mesh = SubResource( 7 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
 
+[node name="AttackTimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
 [connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
 
 
