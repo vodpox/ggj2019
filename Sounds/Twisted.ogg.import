@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Twisted.ogg-ae0161ab49faa0e174f9ec153f4f832a.oggstr"
+
+[deps]
+
+source_file="res://Sounds/Twisted.ogg"
+dest_files=[ "res://.import/Twisted.ogg-ae0161ab49faa0e174f9ec153f4f832a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

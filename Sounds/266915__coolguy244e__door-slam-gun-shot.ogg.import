@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/266915__coolguy244e__door-slam-gun-shot.ogg-05da0c718eedca4b5709f89edc988c65.oggstr"
+
+[deps]
+
+source_file="res://Sounds/266915__coolguy244e__door-slam-gun-shot.ogg"
+dest_files=[ "res://.import/266915__coolguy244e__door-slam-gun-shot.ogg-05da0c718eedca4b5709f89edc988c65.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -21,6 +21,9 @@ var health_ui
 var ammo_ui
 var home_ui
 
+var gunshot_player
+var reload_player
+
 func get_damage(var amount):
 	health -= amount
 	if (health <= 0):
@@ -43,6 +46,9 @@ func _ready():
 	health_ui = get_node("../gui/health")
 	ammo_ui = get_node("../gui/ammo")
 	home_ui = get_node("../gui/press_home")
+	
+	gunshot_player = get_node("../Camera/Gunshot")
+	reload_player = get_node("../Camera/Reload")
 
 func _physics_process(delta):
 	# movement
@@ -83,7 +89,9 @@ func _process(delta):
 	
 	score_ui.text = str(score)
 	health_ui.text = str(home.health)
-	if (reloading):
+	if (bullets + magazine == 0):
+		ammo_ui.text = "OUT OF AMMO!"
+	elif (reloading):
 		ammo_ui.text = "(Reloading) " + str(magazine) + "/" + str(bullets)
 	else:
 		ammo_ui.text = str(magazine) + "/" + str(bullets)
@@ -106,14 +114,18 @@ func _process(delta):
 		$BulletCooldown.start()
 		magazine -= 1
 		
+		gunshot_player.play()
+		
 		if (magazine == 0):
 			reloading = true
 			$ReloadTimer.start()
+			reload_player.play()
 			
 	
 	if (Input.is_action_pressed("reload")):
 		reloading = true
 		$ReloadTimer.start()
+		reload_player.play()
 	
 	if (Input.is_action_just_pressed("ui_select") && home_in_range):
 		in_home = !in_home
@@ -125,6 +137,7 @@ func _process(delta):
 
 func _on_BulletCooldown_timeout():
 	bullet_cooldown = false
+	gunshot_player.stop()
 
 
 func _on_ReloadTimer_timeout():
@@ -139,6 +152,7 @@ func _on_ReloadTimer_timeout():
 	else:
 		magazine = bullets
 		bullets = 0
+	
 
 
 func _on_HomeRange_area_entered(area):
@@ -149,6 +163,10 @@ func _on_HomeRange_area_entered(area):
 func _on_HomeRange_area_exited(area):
 	if (area.get_parent() == home):
 		home_in_range = false
+
+func stop_gunshot():
+	gunshot_player.stop()
+	print("hi")
 
 
 func _on_GetBulletTimer_timeout():
