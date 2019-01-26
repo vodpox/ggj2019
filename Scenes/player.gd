@@ -1,6 +1,5 @@
 extends KinematicBody
 
-const gravity = 5;
 var walk_speed = 10
 var magazine_size = 5
 var magazine = magazine_size
@@ -25,7 +24,12 @@ var home_ui
 func get_damage(var amount):
 	health -= amount
 	if (health <= 0):
-		get_parent().remove_child(self)
+		var node = get_parent()
+		node.remove_child(self)
+		if node.has_node(NodePath("death_gui")):
+			var death_node = node.get_node("death_gui")
+			node.get_tree().paused = true
+			death_node.show()
 
 func _ready():
 	move_and_collide(Vector3(0, -100, 0)) # to ground
@@ -59,9 +63,6 @@ func _physics_process(delta):
 	dir = dir.normalized() * delta * walk_speed
 	
 	move_and_collide(dir)
-	
-	dir -= Vector3(0, gravity, 0)
-	move_and_slide(dir)
 	
 	# looking
 	

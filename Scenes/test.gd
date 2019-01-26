@@ -15,10 +15,11 @@ func _on_resume_pressed(screen):
 	pass
 
 func _on_restart_pressed(screen):
-	get_tree().change_scene("res://Scenes/test.tscn")
+	get_tree().reload_current_scene()
+	get_tree().paused = false
 	pass
 
 func _on_main_menu_pressed(screen):
-	get_tree().reload_current_scene()
-	#get_tree().change_scene("res://TitleScreen/TitleScreen.tscn")
+	get_tree().paused = false
+	get_tree().change_scene("res://TitleScreen/TitleScreen.tscn")
 	pass
