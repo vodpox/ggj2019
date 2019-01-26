@@ -68,7 +68,14 @@ wait_time = 0.3
 one_shot = true
 autostart = false
 
-[node name="HomeRange" type="Area" parent="." index="4"]
+[node name="GetBulletTimer" type="Timer" parent="." index="4"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="HomeRange" type="Area" parent="." index="5"]
 
 input_ray_pickable = false
 input_capture_on_drag = false
@@ -101,6 +108,8 @@ _sections_unfolded = [ "Transform" ]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
 
 [connection signal="timeout" from="BulletCooldown" to="." method="_on_BulletCooldown_timeout"]
+
+[connection signal="timeout" from="GetBulletTimer" to="." method="_on_GetBulletTimer_timeout"]
 
 [connection signal="area_entered" from="HomeRange" to="." method="_on_HomeRange_area_entered"]
 

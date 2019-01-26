@@ -5,12 +5,21 @@ var magazine_size = 5
 var magazine = magazine_size
 var bullet_cooldown = false
 var health = 1
-
+var score = 0
+var max_bullets = 99
+var bullets = max_bullets
+var reloading = false
 var in_home = false
 var home_in_range = false
 
 var camera
 var bullet_scene
+
+var home
+var score_ui
+var health_ui
+var ammo_ui
+var home_ui
 
 func get_damage(var amount):
 	health -= amount
@@ -22,9 +31,15 @@ func _ready():
 	camera = get_node("../Camera")
 	#camera = $Camera
 	bullet_scene = load("res://Scenes/bullet.tscn")
+	
+	home = get_node("../Home")
+	
+	score_ui = get_node("../gui/score")
+	health_ui = get_node("../gui/health")
+	ammo_ui = get_node("../gui/ammo")
+	home_ui = get_node("../gui/press_home")
 
 func _physics_process(delta):
-	
 	# movement
 	
 	var dir = Vector3()
@@ -61,7 +76,21 @@ func _physics_process(delta):
 
 func _process(delta):
 	
-	if (Input.is_action_pressed("ui_accept") && magazine > 0 && !bullet_cooldown && !in_home):
+	score_ui.text = str(score)
+	health_ui.text = str(home.health)
+	if (reloading):
+		ammo_ui.text = "(Reloading) " + str(magazine) + "/" + str(bullets)
+	else:
+		ammo_ui.text = str(magazine) + "/" + str(bullets)
+	if (home_in_range):
+		if (in_home):
+			home_ui.text = "Press SPACE to exit the house"
+		else:
+			home_ui.text = "Press SPACE to enter the house"
+	else:
+		home_ui.text = ""
+	
+	if (Input.is_action_pressed("ui_accept") && magazine > 0 && !bullet_cooldown && !in_home && !reloading):
 		
 		var bullet = bullet_scene.instance()
 		bullet.global_translate(get_translation())
@@ -71,13 +100,22 @@ func _process(delta):
 		bullet_cooldown = true
 		$BulletCooldown.start()
 		magazine -= 1
+		
 		if (magazine == 0):
+			reloading = true
 			$ReloadTimer.start()
+			
+	
+	if (Input.is_action_pressed("reload")):
+		reloading = true
+		$ReloadTimer.start()
 	
 	if (Input.is_action_just_pressed("ui_select") && home_in_range):
 		in_home = !in_home
 		visible = !visible
 		$CollisionShape.disabled = !$CollisionShape.disabled
+		if (in_home):
+			$GetBulletTimer.start()
 
 
 func _on_BulletCooldown_timeout():
@@ -85,14 +123,31 @@ func _on_BulletCooldown_timeout():
 
 
 func _on_ReloadTimer_timeout():
-	magazine = magazine_size
+	
+	reloading = false
+	
+	var remaining = magazine_size - magazine
+	
+	if (bullets >= remaining):
+		magazine += remaining
+		bullets -= remaining
+	else:
+		magazine = bullets
+		bullets = 0
 
 
 func _on_HomeRange_area_entered(area):
-	# todo check if this is home?
-	home_in_range = true
+	if (area.get_parent() == home):
+		home_in_range = true
 
 
 func _on_HomeRange_area_exited(area):
-	# todo check if this is home?
-	home_in_range = false
+	if (area.get_parent() == home):
+		home_in_range = false
+
+
+func _on_GetBulletTimer_timeout():
+	
+	if (in_home && bullets < max_bullets):
+		bullets += 1
+		$GetBulletTimer.start()

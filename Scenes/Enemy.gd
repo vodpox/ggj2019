@@ -21,9 +21,9 @@ func _ready():
 	home = get_node("../../Home")
 
 func _physics_process(delta):
-	#var motion = Vector3(0, 0, 0)
-	#motion += Vector3(0, GRAVITY, 0)
-	#move_and_slide(motion)
+	var motion = Vector3(0, 0, 0)
+	motion += Vector3(0, GRAVITY, 0)
+	move_and_slide(motion)
 	
 	var bodies = $AttackArea.get_overlapping_bodies()
 	
