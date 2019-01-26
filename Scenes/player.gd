@@ -4,12 +4,18 @@ var walk_speed = 10
 var magazine_size = 5
 var magazine = magazine_size
 var bullet_cooldown = false
+var health = 1
 
 var in_home = false
 var home_in_range = false
 
 var camera
 var bullet_scene
+
+func get_damage(var amount):
+	health -= amount
+	if (health <= 0):
+		get_parent().remove_child(self)
 
 func _ready():
 	camera = get_node("../Camera")

@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/SceneAurimas.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Floor.tscn" type="PackedScene" id=2]
 
-[node name="SceneAurimas" type="Spatial" index="0"]
+[node name="SceneAurimas" type="Spatial"]
 
 script = ExtResource( 1 )
 

@@ -18,8 +18,8 @@ subdivide_depth = 0
 
 input_ray_pickable = true
 input_capture_on_drag = false
-collision_layer = 1
-collision_mask = 1
+collision_layer = 8
+collision_mask = 5
 axis_lock_linear_x = false
 axis_lock_linear_y = false
 axis_lock_linear_z = false
@@ -34,7 +34,7 @@ _sections_unfolded = [ "Collision", "Transform" ]
 
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 1 )
-disabled = true
+disabled = false
 _sections_unfolded = [ "Transform" ]
 
 [node name="MeshInstance" type="MeshInstance" parent="." index="1"]
