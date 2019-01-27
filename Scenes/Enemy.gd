@@ -13,7 +13,7 @@ var can_attack = true
 func get_damage(var amount):
 	health -= amount
 	if (health <= 0):
-		player.score += 1
+		player.money += 1
 		get_parent().remove_child(self)
 
 func _ready():
